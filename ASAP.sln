@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-Models", "ASAP-Models\ASAP-Models.csproj", "{7796534D-62B5-4CD7-A5A8-BED0DDB06873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-Context", "ASAP-Context\ASAP-Context.csproj", "{F4445647-DEE4-428A-B440-97711721D332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-Infrastracture", "ASAP-Infrastracture\ASAP-Infrastracture.csproj", "{5FA1748F-C427-417F-91EA-8F40AC17DE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-Application", "ASAP-Application\ASAP-Application.csproj", "{EC882F12-9C49-4593-9E79-94F430444A8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-DTO", "ASAP-DTO\ASAP-DTO.csproj", "{AC0C50A5-9560-4415-8B7E-E3F0B52F4790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASAP-API", "ASAP-API\ASAP-API.csproj", "{D5752C09-300E-4032-9800-8C07ADFD21C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7796534D-62B5-4CD7-A5A8-BED0DDB06873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7796534D-62B5-4CD7-A5A8-BED0DDB06873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7796534D-62B5-4CD7-A5A8-BED0DDB06873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7796534D-62B5-4CD7-A5A8-BED0DDB06873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4445647-DEE4-428A-B440-97711721D332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4445647-DEE4-428A-B440-97711721D332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4445647-DEE4-428A-B440-97711721D332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4445647-DEE4-428A-B440-97711721D332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA1748F-C427-417F-91EA-8F40AC17DE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA1748F-C427-417F-91EA-8F40AC17DE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA1748F-C427-417F-91EA-8F40AC17DE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA1748F-C427-417F-91EA-8F40AC17DE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC882F12-9C49-4593-9E79-94F430444A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC882F12-9C49-4593-9E79-94F430444A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC882F12-9C49-4593-9E79-94F430444A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC882F12-9C49-4593-9E79-94F430444A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC0C50A5-9560-4415-8B7E-E3F0B52F4790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC0C50A5-9560-4415-8B7E-E3F0B52F4790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC0C50A5-9560-4415-8B7E-E3F0B52F4790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC0C50A5-9560-4415-8B7E-E3F0B52F4790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5752C09-300E-4032-9800-8C07ADFD21C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5752C09-300E-4032-9800-8C07ADFD21C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5752C09-300E-4032-9800-8C07ADFD21C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5752C09-300E-4032-9800-8C07ADFD21C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9451C442-E54D-47C4-AD28-80A66C2C1B24}
+	EndGlobalSection
+EndGlobal
