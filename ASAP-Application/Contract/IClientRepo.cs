@@ -11,9 +11,9 @@ namespace ASAP_Application.Contract
     {
         Task<IQueryable<Client>> SearchByName(string Name);
 
-        Task<Client> SearchByphone(string Name);
+        Task<Client> SearchByphone(string phone);
 
-        Task<Client> SearchByEmail(string Name);
+        Task<Client> SearchByEmail(string Email);
 
 
     }

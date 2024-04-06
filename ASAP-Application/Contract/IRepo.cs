@@ -10,7 +10,8 @@ namespace ASAP_Application.Contract
     {
         Task<IQueryable<T>> GetAllEntity();
 
-       
+        Task<T> GetEntitybyId(TID id);
+
         Task<T> CreateEntity(T Entity);
 
         Task<T> UpdateEntity(T Entity);

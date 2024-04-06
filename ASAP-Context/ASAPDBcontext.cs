@@ -16,17 +16,12 @@ namespace ASAP_Context
 
         public DbSet<Stock> stocks { get; set; }
 
-         //private readonly IHttpContextAccessor _httpContextAccessor;
-        public ASAPDBcontext(DbContextOptions options)
-             : base(options)
+           
+        public ASAPDBcontext(DbContextOptions options) : base(options)
         {
-           // _httpContextAccessor = httpContextAccessor;
+           
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    // Configure your database provider here
-        //    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=ASAP-System;Integrated Security=True;Encrypt=false;Trust Server Certificate=false");
-        //}
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

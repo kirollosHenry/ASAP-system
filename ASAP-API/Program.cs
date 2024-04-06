@@ -1,5 +1,8 @@
 
+using ASAP_Application.Contract;
+using ASAP_Application.Services.CientService;
 using ASAP_Context;
+using ASAP_Infrastracture.ClientRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
@@ -18,10 +21,13 @@ namespace ASAP_API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             //Add Configration for database here using connection string in appsetting 
-           var Configuration =builder.Configuration;
-            builder.Services.AddDbContext<ASAPDBcontext>(options =>
-              options.UseSqlServer(Configuration.GetConnectionString("Connstr")));
-
+            builder.Services.AddDbContext<ASAPDBcontext>(op =>
+            {
+                op.UseSqlServer(builder.Configuration.GetConnectionString("Connstr"));
+            });
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddScoped<IClientRepo, ClientRepository>();
+            builder.Services.AddScoped<IClientService, ClientService>();
 
             var app = builder.Build();
 

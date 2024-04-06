@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ASAP_Context.Migrations
 {
     /// <inheritdoc />
-    public partial class inintal : Migration
+    public partial class inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,12 @@ namespace ASAP_Context.Migrations
                 name: "clients",
                 columns: table => new
                 {
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(20)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(20)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(30)", nullable: false)
                 },
                 constraints: table =>
                 {

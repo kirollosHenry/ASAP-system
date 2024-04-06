@@ -24,17 +24,19 @@ namespace ASAP_Context.Migrations
 
             modelBuilder.Entity("ASAP_Models.Client", b =>
                 {
-                    b.Property<Guid>("ClientId")
+                    b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(20)");

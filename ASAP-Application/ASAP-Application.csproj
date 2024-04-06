@@ -16,9 +16,4 @@
     <ProjectReference Include="..\ASAP-Models\ASAP-Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mapper\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

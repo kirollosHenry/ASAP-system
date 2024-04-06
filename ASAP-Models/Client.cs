@@ -8,7 +8,7 @@ namespace ASAP_Models
 {
     public  class Client
     {
-        public Guid ClientId { get; set; }
+        public int ClientId { get; set; }
 
         public string? FirstName { get; set; }
 
@@ -17,5 +17,7 @@ namespace ASAP_Models
         public string? PhoneNumber { get; set; }
 
         public string? Email { get; set; }
+
+       
     }
 }

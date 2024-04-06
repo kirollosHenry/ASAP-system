@@ -1,5 +1,7 @@
 ﻿using ASAP_Application.Contract;
 using ASAP_Context;
+using ASAP_Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,48 +10,45 @@ using System.Threading.Tasks;
 
 namespace ASAP_Infrastracture
 {
-    public class Repository<T, TID> //: IRepo<T, TID> where T : class
+    public class Repository<T, TID> : IRepo<T, TID> where T : class
     {
-        ASAPDBcontext? hostelDbContext { get; set; }
-        public Repository(ASAPDBcontext _hostelDbContext)
+        ASAPDBcontext? asapDbContext { get; set; }
+        DbSet<T> DbSetEntity;
+        public Repository(ASAPDBcontext _ASAPDbContext)
         {
-            hostelDbContext = _hostelDbContext;
-
+            asapDbContext = _ASAPDbContext;
+            DbSetEntity = _ASAPDbContext.Set<T>();
         }
 
-        //public List<T> GetAllEntity()
-        //{
-        //    var QueryAllEntity = hostelDbContext!.Set<T>();
-        //    return QueryAllEntity.ToList();
-        //}
+        public Task<IQueryable<T>> GetAllEntity()
+        {
+            throw new NotImplementedException();
+        }
 
-    
+        public Task<T> GetEntitybyId(TID id)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public T CreateEntity(T Entity)
-        //{
-        //    var QueryCreateEntity = hostelDbContext!.Set<T>().Add(Entity).Entity;
-        //    return QueryCreateEntity;
-        //}
+        public async Task<T> CreateEntity(T Entity)
+        {
+            var add = (await DbSetEntity.AddAsync(Entity)).Entity;
+            return add;
+        }
 
-        //public T UpdateEntity(T Entity)
-        //{
-        //    return hostelDbContext!.Set<T>().Update(Entity).Entity;
-        //}
+        public Task<T> UpdateEntity(T Entity)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public T DeleteEntity(TID id)
-        //{
-        //    var EntityToDelete = hostelDbContext!.Set<T>().Find(id);
-        //    if (EntityToDelete != null)
-        //    {
-        //        hostelDbContext.Set<T>().Remove(EntityToDelete);
-        //        hostelDbContext.SaveChanges();
-        //    }
-        //    return EntityToDelete!;
-        //}
+        public Task<T> DeleteEntity(TID id)
+        {
+            throw new NotImplementedException();
+        }
 
-        //public int Save()
-        //{
-        //    return hostelDbContext!.SaveChanges();
-        //}
+        public async Task<int> Save()
+        {
+            return await asapDbContext.SaveChangesAsync();
+        }
     }
 }
