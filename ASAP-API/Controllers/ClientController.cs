@@ -29,5 +29,24 @@ namespace ASAP_API.Controllers
             return Ok(result);
           
         }
+
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetByID(int id)
+        {
+            try
+            {
+                var QueryProduct = await clientService.GetById(id);
+                if (QueryProduct == null)
+                {
+                    return NotFound();
+                }
+                return Ok(QueryProduct);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -25,9 +25,9 @@ namespace ASAP_Infrastracture
             throw new NotImplementedException();
         }
 
-        public Task<T> GetEntitybyId(TID id)
+        public async Task<T> GetEntitybyId(TID id)
         {
-            throw new NotImplementedException();
+            return await DbSetEntity.FindAsync(id);
         }
 
         public async Task<T> CreateEntity(T Entity)

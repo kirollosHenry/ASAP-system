@@ -83,29 +83,52 @@ namespace ASAP_Application.Services.CientService
             }
         }
 
+        public async Task<ReturnDTO<CreateClientDto>> GetById(int id)
+        {
+            var result = await _clientRepo.GetEntitybyId(id);
+            if (result == null)
+            {
+                return new ReturnDTO<CreateClientDto>
+                {
+                    message = "No client found with the specified ID",
+                    status = false
+                };
+            }
+            else
+            {
+               
+                var clientDto = _mapper.Map<Client,CreateClientDto>(result);
+                return new ReturnDTO<CreateClientDto>
+                {
+                    message = "Client found",
+                    entityDto = clientDto,
+                    status = true
+                };
+            }
+
+        }
+
+        public Task<Client> DeleteClient(int id)
+        {
+            throw new NotImplementedException();
+        }  
+
+
         public Task<Client> GetByEmail(string email)
         {
             throw new NotImplementedException();
         }
 
-        public Client DeleteClient(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Client> GetAllPagination(int PageNum, int num = 10)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Client GetById(int id)
+        
+        public Task<List<Client>> GetAllPagination(int PageNum, int num = 10)
         {
             throw new NotImplementedException();
         }
 
        
 
-        public Client UpdateClient(int id)
+
+        public Task<Client> UpdateClient(int id)
         {
             throw new NotImplementedException();
         }
