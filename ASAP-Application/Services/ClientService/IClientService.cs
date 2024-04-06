@@ -19,15 +19,9 @@ namespace ASAP_Application.Services.CientService
 
         public Task<ReturnDTO<CreateClientDto>> UpdateClient(CreateClientDto client);
 
-        public Task<List<Client>> GetAllPagination(int PageNum, int num = 10);
+        public Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int num,int PageNum );
 
         public Task<Client> GetByEmail(string email);
-
-       
-
-       
-
-
        
     }
 }

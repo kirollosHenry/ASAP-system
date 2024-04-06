@@ -180,20 +180,38 @@ namespace ASAP_Application.Services.CientService
         }
 
 
+
+
+        public async Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int num ,int PageNum)
+        {
+            var allclient=await _clientRepo.GetAllEntity();
+            var client = allclient.Skip(num * (PageNum - 1)).Take(num)
+                .Select(c => new AllClientDTO
+                {
+                    ClientId = c.ClientId,
+                    PhoneNumber = c.PhoneNumber,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Email = c.Email,
+                }).ToList();
+            return new ReturnPagingDto<AllClientDTO>
+            {
+                Entities = client,
+                Count = allclient.Count(),
+                Message="product retreive"
+            };
+        }
+
+
+
+
         public Task<Client> GetByEmail(string email)
         {
             throw new NotImplementedException();
         }
 
-        
-        public Task<List<Client>> GetAllPagination(int PageNum, int num = 10)
-        {
-            throw new NotImplementedException();
-        }
-
-       
 
 
-        
+
     }
 }

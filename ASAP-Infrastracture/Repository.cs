@@ -44,24 +44,21 @@ namespace ASAP_Infrastracture
         }
 
 
-        public async Task<T> UpdateEntity(T Entity )
-        {
-            
-            var client =  (DbSetEntity.Update(Entity)).Entity;
-
-            return client;
-
-        }
-
-
-        public Task<IQueryable<T>> GetAllEntity()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<int> Save()
         {
             return await asapDbContext.SaveChangesAsync();
+        }
+
+        public Task<T> UpdateEntity(T Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IQueryable<T>> GetAllEntity()
+        {
+            return   DbSetEntity.Select(s => s);
         }
     }
 }

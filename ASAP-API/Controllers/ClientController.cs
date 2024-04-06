@@ -81,5 +81,23 @@ namespace ASAP_API.Controllers
 
 
 
+        [HttpGet("{items},{page}")]
+        public async Task<IActionResult> GetAllProduct(int items, int page)
+        {
+            try
+            {
+                var QueryAllProducts = await clientService.GetAllPagination(items, page);
+                if (QueryAllProducts == null || QueryAllProducts.Count == 0)
+                {
+                    return NotFound("No Products Found !!");
+                }
+                return Ok(QueryAllProducts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
