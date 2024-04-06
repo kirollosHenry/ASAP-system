@@ -19,32 +19,41 @@ namespace ASAP_Infrastracture
             asapDbContext = _ASAPDbContext;
             DbSetEntity = _ASAPDbContext.Set<T>();
         }
+        public async Task<T> CreateEntity(T Entity)
+        {
+            var add = (await DbSetEntity.AddAsync(Entity)).Entity;
+            return add;
+        }
+        public async Task<T> GetEntitybyId(TID id)
+        {
+            return await DbSetEntity.FindAsync(id);
+        }
+
+        public async Task<T> DeleteEntity(TID id)
+        {
+            var client = await DbSetEntity.FindAsync(id);
+            if (client != null)
+            {
+                DbSetEntity.Remove(client);
+            }
+            return client;
+        }
 
         public Task<IQueryable<T>> GetAllEntity()
         {
             throw new NotImplementedException();
         }
 
-        public async Task<T> GetEntitybyId(TID id)
-        {
-            return await DbSetEntity.FindAsync(id);
-        }
+       
 
-        public async Task<T> CreateEntity(T Entity)
-        {
-            var add = (await DbSetEntity.AddAsync(Entity)).Entity;
-            return add;
-        }
+       
 
         public Task<T> UpdateEntity(T Entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> DeleteEntity(TID id)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<int> Save()
         {

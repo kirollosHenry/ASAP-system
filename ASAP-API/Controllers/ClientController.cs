@@ -48,5 +48,23 @@ namespace ASAP_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await clientService.DeleteClient(id);
+            if (result.status == true)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+
+
+
     }
 }

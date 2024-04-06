@@ -108,9 +108,29 @@ namespace ASAP_Application.Services.CientService
 
         }
 
-        public Task<Client> DeleteClient(int id)
+
+
+        public async Task<ReturnDTO<CreateClientDto>> DeleteClient(int id)
         {
-            throw new NotImplementedException();
+            var existingClient = await _clientRepo.GetEntitybyId(id);
+            if (existingClient == null)
+            {
+                return new ReturnDTO<CreateClientDto>
+                {
+                    message = "Client not found",
+                    status = false
+                };
+            }
+
+             var result =await _clientRepo.DeleteEntity(id);
+            await _clientRepo.Save();
+            var clientDto = _mapper.Map<Client, CreateClientDto>(result);
+            return new ReturnDTO<CreateClientDto>
+            {
+                message = "Client deleted successfully",
+                entityDto= clientDto,
+                status = true
+            };
         }  
 
 

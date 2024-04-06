@@ -11,17 +11,21 @@ namespace ASAP_Application.Services.CientService
 {
     public interface IClientService
     {
-        public Task<List<Client>> GetAllPagination(int PageNum, int num = 10);
+        public Task<ReturnDTO<CreateClientDto>> CreateClient(CreateClientDto client);
 
         public Task<ReturnDTO<CreateClientDto>> GetById(int id);
 
-        public Task<ReturnDTO<CreateClientDto>> CreateClient(CreateClientDto client);
-
-        public Task<Client> GetByEmail(string email);
+        public Task<ReturnDTO<CreateClientDto>> DeleteClient(int id);
 
         public Task<Client> UpdateClient(int id);
 
-        public Task<Client> DeleteClient(int id);
+        public Task<List<Client>> GetAllPagination(int PageNum, int num = 10);
+
+        public Task<Client> GetByEmail(string email);
+
+       
+
+       
 
 
        
