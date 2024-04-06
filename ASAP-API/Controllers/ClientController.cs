@@ -15,8 +15,8 @@ namespace ASAP_API.Controllers
         {
             clientService = _clientService;
         }
-        [HttpPost]
-        public async Task<IActionResult> create(CreateClientDto client)
+        [HttpPost("create")]
+        public async Task<IActionResult> create([FromBody]CreateClientDto client)
         {
             if (!ModelState.IsValid)
             {
@@ -62,6 +62,21 @@ namespace ASAP_API.Controllers
             {
                 return NotFound(result);
             }
+        }
+
+
+
+        [HttpPost("update")]
+        public async Task<IActionResult> update([FromBody] CreateClientDto client)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await clientService.UpdateClient(client);
+
+            return Ok(result);
         }
 
 

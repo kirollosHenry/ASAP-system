@@ -17,7 +17,7 @@ namespace ASAP_Application.Services.CientService
 
         public Task<ReturnDTO<CreateClientDto>> DeleteClient(int id);
 
-        public Task<Client> UpdateClient(int id);
+        public Task<ReturnDTO<CreateClientDto>> UpdateClient(CreateClientDto client);
 
         public Task<List<Client>> GetAllPagination(int PageNum, int num = 10);
 

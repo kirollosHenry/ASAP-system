@@ -83,6 +83,7 @@ namespace ASAP_Application.Services.CientService
             }
         }
 
+
         public async Task<ReturnDTO<CreateClientDto>> GetById(int id)
         {
             var result = await _clientRepo.GetEntitybyId(id);
@@ -131,7 +132,52 @@ namespace ASAP_Application.Services.CientService
                 entityDto= clientDto,
                 status = true
             };
-        }  
+        }
+
+
+
+        public async  Task<ReturnDTO<CreateClientDto>> UpdateClient(CreateClientDto client)
+        {
+            var existingClient = await _clientRepo.GetEntitybyId(client.ClientId);
+
+            if (existingClient != null)
+            {
+                if (await _clientRepo.SearchByEmail(client.Email) == null || client.Email == existingClient.Email )
+                {
+                    existingClient.PhoneNumber = client.PhoneNumber;
+                    existingClient.LastName = client.LastName;
+                    existingClient.FirstName = client.FirstName;
+                    existingClient.Email = client.Email;
+                    var result = await _clientRepo.UpdateEntity(existingClient);
+                    await _clientRepo.Save();
+                    var clientDto = _mapper.Map<Client, CreateClientDto>(result);
+                    return new ReturnDTO<CreateClientDto>
+                    {
+                        message = "Client update successfully",
+                        entityDto = clientDto,
+                        status = true
+                    };
+                }
+                
+                return new ReturnDTO<CreateClientDto>
+                {
+                    message = "email found",
+                    entityDto = client,
+                    status = false
+                };
+                
+            }
+            else
+            {
+                return new ReturnDTO<CreateClientDto>
+                {
+                    message = "Client not found",
+                    status = false
+                };
+            }
+
+
+        }
 
 
         public Task<Client> GetByEmail(string email)
@@ -148,9 +194,6 @@ namespace ASAP_Application.Services.CientService
        
 
 
-        public Task<Client> UpdateClient(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

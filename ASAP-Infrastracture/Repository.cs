@@ -19,11 +19,15 @@ namespace ASAP_Infrastracture
             asapDbContext = _ASAPDbContext;
             DbSetEntity = _ASAPDbContext.Set<T>();
         }
+
+
         public async Task<T> CreateEntity(T Entity)
         {
             var add = (await DbSetEntity.AddAsync(Entity)).Entity;
             return add;
         }
+
+
         public async Task<T> GetEntitybyId(TID id)
         {
             return await DbSetEntity.FindAsync(id);
@@ -39,21 +43,21 @@ namespace ASAP_Infrastracture
             return client;
         }
 
+
+        public async Task<T> UpdateEntity(T Entity )
+        {
+            
+            var client =  (DbSetEntity.Update(Entity)).Entity;
+
+            return client;
+
+        }
+
+
         public Task<IQueryable<T>> GetAllEntity()
         {
             throw new NotImplementedException();
         }
-
-       
-
-       
-
-        public Task<T> UpdateEntity(T Entity)
-        {
-            throw new NotImplementedException();
-        }
-
-       
 
         public async Task<int> Save()
         {
