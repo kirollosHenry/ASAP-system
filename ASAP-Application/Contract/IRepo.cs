@@ -11,9 +11,6 @@ namespace ASAP_Application.Contract
         Task<IQueryable<T>> GetAllEntity();
 
        
-
-      
-
         Task<T> CreateEntity(T Entity);
 
         Task<T> UpdateEntity(T Entity);

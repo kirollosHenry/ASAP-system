@@ -9,27 +9,11 @@ using System.Threading.Tasks;
 
 namespace ASAP_Infrastracture.ClientRepository
 {
-    public class ClientRepository : Repository<Client, int> , IClientRepo
+    public class ClientRepository : Repository<Client, int> 
     {
         public ClientRepository(ASAPDBcontext _DbContext) : base(_DbContext)
         {
         }
 
-        public Task<IQueryable<Client>> SearchByEmail(string Name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Client> SearchByName(string Name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Client> SearchByphone(string Name)
-        {
-            throw new NotImplementedException();
-        }
-
-     
     }
 }
