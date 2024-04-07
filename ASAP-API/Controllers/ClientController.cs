@@ -1,7 +1,9 @@
 ﻿using ASAP_Application.Services.CientService;
+using ASAP_Application.Services.Hangifure;
 using ASAP_DTO;
 using ASAP_DTO.ClientDTO;
 using ASAP_Models;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASAP_API.Controllers
@@ -11,13 +13,37 @@ namespace ASAP_API.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientService clientService;
-        public ClientController(IClientService _clientService)
+        private readonly IJobService jobService;
+        private readonly IBackgroundJobClient backgroundJobClient;
+        private readonly IRecurringJobManager _recurringJobManager;
+        public ClientController(
+                                IClientService _clientService,
+                                IJobService _jobService ,
+                                IBackgroundJobClient backgroundJob,
+                                IRecurringJobManager recurringJobManager
+                               )
         {
             clientService = _clientService;
+            jobService = _jobService;
+            backgroundJobClient = backgroundJob;
+            _recurringJobManager = recurringJobManager;
+
         }
+        [HttpGet("/FireAndForgetJob")]
+        public ActionResult CreateFireAndForgetJob()
+        {
+            //var parentJobId = backgroundJobClient.Enqueue(() => jobService.FireAndForgetJob());
+            //backgroundJobClient.ContinueJobWith(parentJobId, () => jobService.ContinuationJob());
+            _recurringJobManager.AddOrUpdate("jobId", () => jobService.ReccuringJob(), Cron.Minutely);
+            return Ok();
+        }
+
+
+
         [HttpPost("create")]
         public async Task<IActionResult> create([FromBody]CreateClientDto client)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

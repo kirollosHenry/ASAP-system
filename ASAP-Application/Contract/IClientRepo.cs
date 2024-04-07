@@ -15,6 +15,8 @@ namespace ASAP_Application.Contract
 
         Task<Client> SearchByEmail(string Email);
 
+        Task<List<string>> GetAllEMail();
+
 
     }
 }

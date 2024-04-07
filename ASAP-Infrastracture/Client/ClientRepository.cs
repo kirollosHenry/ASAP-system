@@ -18,6 +18,16 @@ namespace ASAP_Infrastracture.ClientRepository
             dbcontext = _DbContext  ?? throw new ArgumentNullException(nameof(_DbContext));
         }
 
+        public async Task<List<string>> GetAllEMail()
+        {
+
+           var email = await dbcontext.clients.Select(c => c.Email).ToListAsync();
+            if (email is null)
+                return null;
+            else 
+            return email;
+        }
+
         public async Task<Client> SearchByEmail(string Email)
         {
             try
