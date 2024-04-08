@@ -10,8 +10,8 @@ namespace ASAP_Models
     {
         public int Id { get; set; }   
         public DateTime Date { get; set; }
-        public string Exchange { get; set; }
-        public string Name { get; set; }
-        public string Status { get; set; }
+        public int split_from { get; set; }
+        public int split_to { get; set; }
+        public string ticker { get; set; }
     }
 }

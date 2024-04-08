@@ -9,7 +9,9 @@ namespace ASAP_DTO
     public class ReturnPagingDto<T>
     {
         public List<T>? Entities { get; set; }
+
         public int Count { get; set; }
+
         public string? Message { get; set; }
 
         public ReturnPagingDto()

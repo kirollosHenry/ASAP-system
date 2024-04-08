@@ -1,4 +1,6 @@
-﻿using ASAP_Application.Services.CientService;
+﻿using ASAP_Application.Services.APIService;
+using ASAP_Application.Services.CientService;
+using ASAP_Application.Services.EmailService;
 using ASAP_Application.Services.Hangifure;
 using ASAP_DTO;
 using ASAP_DTO.ClientDTO;
@@ -16,25 +18,33 @@ namespace ASAP_API.Controllers
         private readonly IJobService jobService;
         private readonly IBackgroundJobClient backgroundJobClient;
         private readonly IRecurringJobManager _recurringJobManager;
+        private readonly IApiService apiService;
+        
+        private readonly IEmail emailService;
         public ClientController(
                                 IClientService _clientService,
-                                IJobService _jobService ,
-                                IBackgroundJobClient backgroundJob,
-                                IRecurringJobManager recurringJobManager
+                               
+                               
+                              
+                                IEmail _emailService,
+                                IApiService _apiService
                                )
         {
             clientService = _clientService;
-            jobService = _jobService;
-            backgroundJobClient = backgroundJob;
-            _recurringJobManager = recurringJobManager;
+        
+           
+            emailService = _emailService;
+            apiService= _apiService; ;
 
         }
         [HttpGet("/FireAndForgetJob")]
-        public ActionResult CreateFireAndForgetJob()
+        public async Task<ActionResult> CreateFireAndForgetJob()
         {
-            //var parentJobId = backgroundJobClient.Enqueue(() => jobService.FireAndForgetJob());
-            //backgroundJobClient.ContinueJobWith(parentJobId, () => jobService.ContinuationJob());
-            _recurringJobManager.AddOrUpdate("jobId", () => jobService.ReccuringJob(), Cron.Minutely);
+            //RecurringJob.AddOrUpdate("FirstJob", () => jobService.ReccuringJob(), Cron.Minutely);
+            // RecurringJob.AddOrUpdate("csc", () => apiService.GetDataAsync(), Cron.Minutely);
+            // Schedule the second job to run every minute, dependent on the first job
+            // RecurringJob.AddOrUpdate("SecondJob", () => jobService.ContinuationJob(), Cron.Minutely);
+            var response =await  apiService.GetDataAsync();
             return Ok();
         }
 

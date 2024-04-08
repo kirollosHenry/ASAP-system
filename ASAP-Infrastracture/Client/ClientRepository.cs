@@ -23,9 +23,9 @@ namespace ASAP_Infrastracture.ClientRepository
 
            var email = await dbcontext.clients.Select(c => c.Email).ToListAsync();
             if (email is null)
-                return null;
+                return null!;
             else 
-            return email;
+            return email!;
         }
 
         public async Task<Client> SearchByEmail(string Email)

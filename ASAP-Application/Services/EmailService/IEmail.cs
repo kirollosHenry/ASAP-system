@@ -9,5 +9,6 @@ namespace ASAP_Application.Services.EmailService
     public  interface IEmail
     {
         Task SendEmailsToClients();
+        Task SendEmailToCustomerAsync();
     }
 }
