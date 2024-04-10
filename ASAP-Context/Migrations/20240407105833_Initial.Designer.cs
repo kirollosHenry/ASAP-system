@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASAP_Context.Migrations
 {
     [DbContext(typeof(ASAPDBcontext))]
+<<<<<<<< HEAD:ASAP-Context/Migrations/20240407105833_Initial.Designer.cs
     [Migration("20240407105833_Initial")]
     partial class Initial
+========
+    [Migration("20240408114153_stockProperty")]
+    partial class stockProperty
+>>>>>>>> 2a31de161e3c0a708fb3e625fb52b87a640a59de:ASAP-Context/Migrations/20240408114153_stockProperty.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +63,7 @@ namespace ASAP_Context.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+<<<<<<<< HEAD:ASAP-Context/Migrations/20240407105833_Initial.Designer.cs
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -67,15 +73,31 @@ namespace ASAP_Context.Migrations
                     b.Property<string>("Exchange")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+========
+>>>>>>>> 2a31de161e3c0a708fb3e625fb52b87a640a59de:ASAP-Context/Migrations/20240408114153_stockProperty.Designer.cs
 
-                    b.Property<string>("Name")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("split_from")
+                        .HasColumnType("int");
+
+                    b.Property<int>("split_to")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ticker")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<<< HEAD:ASAP-Context/Migrations/20240407105833_Initial.Designer.cs
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+========
+>>>>>>>> 2a31de161e3c0a708fb3e625fb52b87a640a59de:ASAP-Context/Migrations/20240408114153_stockProperty.Designer.cs
                     b.HasKey("Id");
 
                     b.ToTable("stocks");

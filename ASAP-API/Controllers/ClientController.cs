@@ -1,7 +1,11 @@
-﻿using ASAP_Application.Services.CientService;
+﻿using ASAP_Application.Services.APIService;
+using ASAP_Application.Services.CientService;
+using ASAP_Application.Services.EmailService;
+using ASAP_Application.Services.Hangifure;
 using ASAP_DTO;
 using ASAP_DTO.ClientDTO;
 using ASAP_Models;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASAP_API.Controllers
@@ -11,13 +15,45 @@ namespace ASAP_API.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientService clientService;
-        public ClientController(IClientService _clientService)
+        private readonly IJobService jobService;
+        private readonly IBackgroundJobClient backgroundJobClient;
+        private readonly IRecurringJobManager _recurringJobManager;
+        private readonly IApiService apiService;
+        
+        private readonly IEmail emailService;
+        public ClientController(
+                                IClientService _clientService,
+                               
+                               
+                              
+                                IEmail _emailService,
+                                IApiService _apiService
+                               )
         {
             clientService = _clientService;
+        
+           
+            emailService = _emailService;
+            apiService= _apiService; ;
+
         }
+        [HttpGet("/FireAndForgetJob")]
+        public async Task<ActionResult> CreateFireAndForgetJob()
+        {
+            //RecurringJob.AddOrUpdate("FirstJob", () => jobService.ReccuringJob(), Cron.Minutely);
+            // RecurringJob.AddOrUpdate("csc", () => apiService.GetDataAsync(), Cron.Minutely);
+            // Schedule the second job to run every minute, dependent on the first job
+            // RecurringJob.AddOrUpdate("SecondJob", () => jobService.ContinuationJob(), Cron.Minutely);
+            var response =await  apiService.GetDataAsync();
+            return Ok();
+        }
+
+
+
         [HttpPost("create")]
         public async Task<IActionResult> create([FromBody]CreateClientDto client)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

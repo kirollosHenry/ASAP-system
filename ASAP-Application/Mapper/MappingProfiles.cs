@@ -13,7 +13,6 @@ namespace ASAP_Application.Mapper
     {
         public MappingProfiles()
         {
-          //  CreateMap<CreateClientDto, Client>();
            
             CreateMap<CreateClientDto, Client>()
                     .ForMember(dest => dest.ClientId, opt => opt.Ignore());
