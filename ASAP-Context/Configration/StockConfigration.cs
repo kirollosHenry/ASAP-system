@@ -14,8 +14,8 @@ namespace ASAP_Context.Configration
         public void Configure(EntityTypeBuilder<Stock> builder)
         {
           
-                builder.HasKey(C => C.StockID);
-                builder.Property(C => C.Name).HasColumnType("nvarchar").IsRequired();
+                builder.HasKey(C => C.Id);
+                
     
            
         }

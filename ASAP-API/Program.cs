@@ -1,8 +1,10 @@
 
 using ASAP_Application.Contract;
 using ASAP_Application.Services.CientService;
+using ASAP_Application.Services.EmailService;
 using ASAP_Context;
 using ASAP_Infrastracture.ClientRepository;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
@@ -15,19 +17,36 @@ namespace ASAP_API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            builder.Services.AddCors(op =>
+            {
+                op.AddPolicy("Default", policy =>
+                {
+                    //policy.WithOrigins("http://localhost:4200,null").WithMethods("get,post").WithHeaders("xyz");
+                    policy.AllowAnyHeader().
+                           AllowAnyMethod().
+                           AllowAnyOrigin();
+                });
+            });
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHangfire(x =>
+            {
+                x.UseSqlServerStorage(builder.Configuration.GetConnectionString("Connstr"));
+            });
+            builder.Services.AddHangfireServer();
             //Add Configration for database here using connection string in appsetting 
             builder.Services.AddDbContext<ASAPDBcontext>(op =>
             {
                 op.UseSqlServer(builder.Configuration.GetConnectionString("Connstr"));
             });
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<IClientRepo, ClientRepository>();
             builder.Services.AddScoped<IClientService, ClientService>();
+            builder.Services.AddScoped<IEmail, Email>();
+
 
             var app = builder.Build();
 
@@ -41,8 +60,8 @@ namespace ASAP_API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
-
+            app.UseHangfireDashboard();
+            app.UseCors("Default");
             app.MapControllers();
 
             app.Run();

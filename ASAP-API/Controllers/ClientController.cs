@@ -81,17 +81,17 @@ namespace ASAP_API.Controllers
 
 
 
-        [HttpGet("{items},{page}")]
-        public async Task<IActionResult> GetAllProduct(int items, int page)
+        [HttpGet("{skip},{take}")]
+        public async Task<IActionResult> GetAllClients(int skip, int take)
         {
             try
             {
-                var QueryAllProducts = await clientService.GetAllPagination(items, page);
-                if (QueryAllProducts == null || QueryAllProducts.Count == 0)
+                var QueryAllClients = await clientService.GetAllPagination(skip, take);
+                if (QueryAllClients == null || QueryAllClients.total == 0)
                 {
-                    return NotFound("No Products Found !!");
+                    return NotFound("No Client Found !!");
                 }
-                return Ok(QueryAllProducts);
+                return Ok(QueryAllClients);
             }
             catch (Exception ex)
             {

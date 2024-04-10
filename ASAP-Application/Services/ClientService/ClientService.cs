@@ -182,10 +182,10 @@ namespace ASAP_Application.Services.CientService
 
 
 
-        public async Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int num ,int PageNum)
+        public async Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int skip=0 ,int take=5)
         {
             var allclient=await _clientRepo.GetAllEntity();
-            var client = allclient.Skip(num * (PageNum - 1)).Take(num)
+            var client = allclient.Skip(skip).Take(take)
                 .Select(c => new AllClientDTO
                 {
                     ClientId = c.ClientId,
@@ -195,10 +195,10 @@ namespace ASAP_Application.Services.CientService
                     Email = c.Email,
                 }).ToList();
             return new ReturnPagingDto<AllClientDTO>
-            {
-                Entities = client,
-                Count = allclient.Count(),
-                Message="product retreive"
+            {       
+                data = client,
+                total = allclient.Count(),
+                //Message="Clients retreive"
             };
         }
 
