@@ -63,5 +63,10 @@ namespace ASAP_Application.Services.EmailService
                 }
             }
         }
+
+        Task IEmail.SendEmailToCustomerAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

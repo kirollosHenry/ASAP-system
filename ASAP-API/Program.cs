@@ -4,7 +4,7 @@ using ASAP_Application.Services.APIService;
 using ASAP_Application.Services.CientService;
 using ASAP_Application.Services.EmailService;
 using ASAP_Application.Services.Hangifure;
-using ASAP_Application.Services.StockService;
+
 using ASAP_Context;
 using ASAP_DTO.StockDTO;
 using ASAP_Infrastracture.ClientRepository;
@@ -53,7 +53,7 @@ namespace ASAP_API
 
             // Register ApiService with the dependency injection container
             builder.Services.AddScoped<ApiService>();
-            builder.Services.AddScoped(_ => builder.Configuration["ApiSettings:ApiUrl"]); // Assuming you're using ASP.NET Core configuration
+            builder.Services.AddScoped(_ => builder.Configuration["ApiSettings:ApiUrl"]); 
             builder.Services.AddScoped(_ => builder.Configuration["ApiSettings:ApiKey"]);
             // Add configuration for API settings
             builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
@@ -63,7 +63,6 @@ namespace ASAP_API
             builder.Services.AddScoped<IEmail, Email>();
             builder.Services.AddScoped<IJobService, JobService>();
             builder.Services.AddScoped<IApiService, ApiService>();
-            builder.Services.AddScoped<IStockService, stockService>();
             builder.Services.AddScoped<IStockRepo, StockRepository>();
             var app = builder.Build();
 
@@ -77,7 +76,7 @@ namespace ASAP_API
             app.UseHttpsRedirection();
            
             app.UseAuthorization();
-         //   app.UseHangfireDashboard();
+         // app.UseHangfireDashboard();
 
             app.MapControllers();
 

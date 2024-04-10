@@ -51,9 +51,13 @@ namespace ASAP_Infrastracture
             return await asapDbContext.SaveChangesAsync();
         }
 
-        public Task<T> UpdateEntity(T Entity)
+        public async Task<T> UpdateEntity(T Entity)
         {
-            throw new NotImplementedException();
+            var client = (DbSetEntity.Update(Entity)).Entity;
+
+            return client;
+
+
         }
 
         public async Task<IQueryable<T>> GetAllEntity()

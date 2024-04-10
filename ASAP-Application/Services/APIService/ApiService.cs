@@ -49,11 +49,11 @@ namespace ASAP_Application.Services.APIService
                     foreach (var result in results)
                     {
 
-                        Console.WriteLine($"Execution Date: {result.Date}");
-                        Console.WriteLine($"Split From: {result.split_from}");
-                        Console.WriteLine($"Split To: {result.split_to}");
-                        Console.WriteLine($"Ticker: {result.ticker}");
-                        Console.WriteLine("----------------------------------");
+                        //Console.WriteLine($"Execution Date: {result.Date}");
+                        //Console.WriteLine($"Split From: {result.split_from}");
+                        //Console.WriteLine($"Split To: {result.split_to}");
+                        //Console.WriteLine($"Ticker: {result.ticker}");
+                        //Console.WriteLine("----------------------------------");
 
                     }
 
