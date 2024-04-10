@@ -21,7 +21,7 @@ namespace ASAP_Application.Services.CientService
 
         public Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int num,int PageNum );
 
-        public Task<Client> GetByEmail(string email);
+        public Task<ReturnPagingDto<Client>> GetByName(string email);
        
     }
 }

@@ -30,7 +30,12 @@ namespace ASAP_Infrastracture
 
         public async Task<T> GetEntitybyId(TID id)
         {
-            return await DbSetEntity.FindAsync(id);
+           var entity =  await DbSetEntity.FindAsync(id);
+            if(entity != null)
+            {
+                return entity;
+            }
+            return null!;
         }
 
         public async Task<T> DeleteEntity(TID id)
@@ -48,14 +53,22 @@ namespace ASAP_Infrastracture
 
         public async Task<int> Save()
         {
-            return await asapDbContext.SaveChangesAsync();
+            var number =await asapDbContext!.SaveChangesAsync();
+            if(number>0)
+            {
+                return 1;
+            }
+            return 0;
         }
 
         public async Task<T> UpdateEntity(T Entity)
         {
             var client = (DbSetEntity.Update(Entity)).Entity;
-
-            return client;
+            if(client != null)
+            {
+                return client;
+            }
+            return null!;
 
 
         }

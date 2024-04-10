@@ -28,7 +28,7 @@ namespace ASAP_Application.Services.APIService
 
         public async Task<string> GetDataAsync()
         {
-            List<Stock> results = null;
+            List<Stock> results = null!;
             string responseContent = string.Empty;
             var apiurl = "https://api.polygon.io/v3/reference/splits?cursor=YXA9MjAyNC0wNC0wOSZhcz1UUlVNWSZleGVjdXRpb25fZGF0ZS5sdGU9MjAyNC0wNC0wOSZsaW1pdD0xMCZvcmRlcj1kZXNjJnNvcnQ9ZXhlY3V0aW9uX2RhdGU";
             var apikey = "prpzYUpeBsbHyJop6VzNLPfhpEin9uvE";
@@ -42,7 +42,7 @@ namespace ASAP_Application.Services.APIService
             if (response.IsSuccessStatusCode)
             {
                 responseContent = await response.Content.ReadAsStringAsync();
-                ResponseDTO apiResponse = JsonConvert.DeserializeObject<ResponseDTO>(responseContent);
+                ResponseDTO apiResponse = JsonConvert.DeserializeObject<ResponseDTO>(responseContent)!;
                 if (apiResponse != null)
                 {
                     results = apiResponse.results;

@@ -23,16 +23,12 @@ namespace ASAP_API.Controllers
         private readonly IEmail emailService;
         public ClientController(
                                 IClientService _clientService,
-                               
-                               
-                              
                                 IEmail _emailService,
                                 IApiService _apiService
                                )
         {
             clientService = _clientService;
         
-           
             emailService = _emailService;
             apiService= _apiService; ;
 
@@ -101,7 +97,6 @@ namespace ASAP_API.Controllers
         }
 
 
-
         [HttpPost("update")]
         public async Task<IActionResult> update([FromBody] CreateClientDto client)
         {
@@ -134,6 +129,23 @@ namespace ASAP_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("Name parameter is required.");
+            }
+
+            // Invoke the repository method to search by name
+            var searchResults = await clientService.GetByName(name);
+
+            // Return the search results to the client
+            return Ok(searchResults);
+        }
+
+
 
     }
 }

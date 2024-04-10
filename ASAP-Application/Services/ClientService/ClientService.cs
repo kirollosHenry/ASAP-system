@@ -29,7 +29,7 @@ namespace ASAP_Application.Services.CientService
             {
                 try
                 {
-                    var result = await _clientRepo.SearchByEmail(client.Email);
+                    var result = await _clientRepo.SearchByEmail(client.Email!);
                     if (result ==null)
                     {
                         var mappclient = _mapper.Map<CreateClientDto, Client>(client);
@@ -142,7 +142,7 @@ namespace ASAP_Application.Services.CientService
 
             if (existingClient != null)
             {
-                if (await _clientRepo.SearchByEmail(client.Email) == null || client.Email == existingClient.Email )
+                if (await _clientRepo.SearchByEmail(client.Email!) == null || client.Email == existingClient.Email )
                 {
                     existingClient.PhoneNumber = client.PhoneNumber;
                     existingClient.LastName = client.LastName;
@@ -181,7 +181,6 @@ namespace ASAP_Application.Services.CientService
 
 
 
-
         public async Task<ReturnPagingDto<AllClientDTO>> GetAllPagination(int skip=0 ,int take=5)
         {
             var allclient=await _clientRepo.GetAllEntity();
@@ -198,16 +197,26 @@ namespace ASAP_Application.Services.CientService
             {       
                 data = client,
                 total = allclient.Count(),
-                //Message="Clients retreive"
+                
             };
         }
 
 
 
 
-        public Task<Client> GetByEmail(string email)
+        public async Task<ReturnPagingDto<Client>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            try { 
+            var clients =await _clientRepo.SearchByName(name);
+                if (clients != null)
+                {
+                    return new ReturnPagingDto<Client> { data = clients, total = clients.Count };
+                }
+                else { return null!; }
+            }catch (Exception ex)
+            {
+                return new ReturnPagingDto<Client> { data = null, total = 0 };
+            }
         }
 
 

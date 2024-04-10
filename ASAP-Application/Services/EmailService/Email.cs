@@ -30,7 +30,7 @@ namespace ASAP_Application.Services.EmailService
         }
 
 
-        private async Task SendEmailToCustomerAsync()
+        public  async Task SendEmailToCustomerAsync()
         {
             string emailContent = "Hello,This is a formatted email message.";
             // Retrieve email settings from configuration
@@ -40,7 +40,7 @@ namespace ASAP_Application.Services.EmailService
 
             // Get values from configuration
             var host = emailSettings["Host"];
-            var port = int.Parse(emailSettings["Port"]);
+            var port = int.Parse(emailSettings["Port"]!);
             var senderEmail = emailSettings["SenderEmail"];
             var username = emailSettings["Username"];
             var password = emailSettings["Password"];
@@ -54,7 +54,7 @@ namespace ASAP_Application.Services.EmailService
                 foreach (var emailAddress in emailAddresses)
                 {
                     // Create and send the email message
-                    using (var message = new MailMessage(senderEmail, emailAddress))
+                    using (var message = new MailMessage(senderEmail!, emailAddress))
                     {
                         message.Subject = "the New";
                         message.Body = emailContent;
@@ -64,9 +64,9 @@ namespace ASAP_Application.Services.EmailService
             }
         }
 
-        Task IEmail.SendEmailToCustomerAsync()
-        {
-            throw new NotImplementedException();
-        }
+        //Task IEmail.SendEmailToCustomerAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

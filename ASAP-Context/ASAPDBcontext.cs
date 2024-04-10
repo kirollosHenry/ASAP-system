@@ -26,6 +26,7 @@ namespace ASAP_Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ASAPDBcontext).Assembly);
+            //Here to read  all the Configration which find in folder configration to make each model has own congfigration 
         }
     }
 }

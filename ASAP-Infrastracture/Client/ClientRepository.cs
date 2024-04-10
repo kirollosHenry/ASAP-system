@@ -23,9 +23,9 @@ namespace ASAP_Infrastracture.ClientRepository
 
            var email = await dbcontext.clients.Select(c => c.Email).ToListAsync();
             if (email is null)
-                return null;
+                return null!;
             else 
-            return email;
+            return email!;
         }
 
         public async Task<Client> SearchByEmail(string Email)
@@ -42,20 +42,35 @@ namespace ASAP_Infrastracture.ClientRepository
             catch (Exception ex)
             {
                 
-                return null;
+                return null!;
             }
            
-
         }
 
-        public Task<IQueryable<Client>> SearchByName(string Name)
+        public async Task<List<Client>> SearchByName(string Name)
         {
-            throw new NotImplementedException();
+            
+            var nameParts = Name.Split(' ');
+
+           
+            var entities = await dbcontext.clients
+                .Where(e => nameParts.Any(p => e.FirstName.Contains(p)) || nameParts.Any(p => e.LastName.Contains(p)))
+                .ToListAsync();
+            if (entities != null)
+            {
+                return entities;
+            }
+            return null!;
         }
 
-        public Task<Client> SearchByphone(string phone)
+        public async Task<List<Client>> SearchByphone(string phone)
         {
-            throw new NotImplementedException();
+            var entities = await dbcontext.clients.Where(e => e.PhoneNumber!.Contains(phone)).ToListAsync();
+            if (entities.Count() > 0)
+            {
+                return entities;
+            }
+            return null!;
         }
     }
 }
